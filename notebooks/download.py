@@ -6,9 +6,11 @@ import pandas as pd
 from IPython.display import clear_output
 from youtube_search import YoutubeSearch
 
-sucess = pd.read_csv("data/sucess_sample.csv")
-# sucess.head(2)
-fail = pd.read_csv("data/fail_sample.csv")
+# sucess = pd.read_csv("data/sucess_sample.csv")
+# # sucess.head(2)
+# fail = pd.read_csv("data/fail_sample.csv")
+
+dataframe = pd.read_csv("data/dataframe_15_anos.csv")
 
 
 def download(track, artist, locate) -> None:
@@ -17,7 +19,7 @@ def download(track, artist, locate) -> None:
     artistclean = re.sub(r"[^a-zA-Z0-9]", "_", artist)
     trackclean = re.sub(r"[^a-zA-Z0-9]", "_", track)
     filename = f"{trackclean}_{artistclean}"
-    if Path(f"{locate}/{filename}.wav").is_file():
+    if Path(f"{locate}/wav/{filename}.wav").is_file():
         return None
     print(filename)
     # Pesquisa no YouTube
@@ -49,6 +51,6 @@ def download(track, artist, locate) -> None:
     #     pass
 
 
-sucess.apply(lambda x: download(x["track"], x["artist"], "data/musics"), axis=1)
+dataframe.apply(lambda x: download(x["track"], x["artist"], "data/musics"), axis=1)
 
-fail.apply(lambda x: download(x["track"], x["artist"], "data/musics"), axis=1)
+# fail.apply(lambda x: download(x["track"], x["artist"], "data/musics"), axis=1)
